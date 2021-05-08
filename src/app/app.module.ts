@@ -11,6 +11,7 @@ import { RolesComponent } from './components/roles/roles.component';
 import { AboutComponent } from './components/about/about.component';
 import { UserTableComponent } from './components/user-table/user-table.component';
 import { NewsService } from './services/news.service';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NewsService } from './services/news.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     NewsService

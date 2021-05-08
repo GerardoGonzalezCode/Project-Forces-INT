@@ -1,46 +1,30 @@
 <div class="container">
-    <div class="jumbotron">
-        <h1 class="display-4">Spartan Software</h1>
-        <p class="lead">Aplicacion para el manejo de usuarios</p>
-        <hr class="my-4">
-        <h2>News</h2>
-    </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
+  <div class="jumbotron">
+      <h1 class="display-4">Spartan Software</h1>
+      <p class="lead">Aplicacion para el manejo de usuarios</p>
+      <hr class="my-4">
+      <div class="row">
+        <div class="col-2">
+          <h2>News</h2>
         </div>
         <div class="col">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
+          <button type="button" class="btn btn-info" (click)="moreInfo()">More Info</button>
         </div>
       </div>
+  </div>
+  <div *ngIf="condition1" class="row row-cols-1 row-cols-md-3 g-4">
+    <div *ngFor="let article of news" class="col">
+      <div class="card">
+        <img src="{{ article.urlToImage }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ article.title }}</h5>
+          <p class="card-text">{{ article.author }}</p>
+          <hr>
+          <p class="card-text">{{ article.content }}</p>
+          <p class="card-text">Published At: {{ article.publishedAt }}</p>
+          <button type="button" class="btn btn-primary" (click)="openPage(article.url)">Url</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
