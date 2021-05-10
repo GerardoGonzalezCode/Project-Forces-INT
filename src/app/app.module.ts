@@ -11,7 +11,9 @@ import { RolesComponent } from './components/roles/roles.component';
 import { AboutComponent } from './components/about/about.component';
 import { UserTableComponent } from './components/user-table/user-table.component';
 import { NewsService } from './services/news.service';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { SearchComponent } from './components/shared/search/search.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,12 +24,15 @@ import { HttpClientModule } from '@angular/common/http'
     DepartmentComponent,
     RolesComponent,
     AboutComponent,
-    UserTableComponent
+    UserTableComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     NewsService

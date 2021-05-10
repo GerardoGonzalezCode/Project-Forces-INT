@@ -17,7 +17,7 @@
               Tools
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" [routerLink]="['manage']">User Manage</a></li>
+              <li><a class="dropdown-item" [routerLink]="['register']">User Manage</a></li>
               <li><a class="dropdown-item" [routerLink]="['department']">Department</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" [routerLink]="['roles']">Roles</a></li>
@@ -27,12 +27,12 @@
             <a class="nav-link" aria-current="page" [routerLink]="['about']">About Us</a>
           </li>
         </ul>
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
         <div class="d-flex">
-          <button class="btn btn-outline-success" type="submit">Logout</button>
+            <input class="form-control me-2" type="text" placeholder="Buscar Empleado" aria-label="Search" (keyup.enter)="buscarEmp(textoBuscar.value)" #textoBuscar>
+            <button class="btn btn-outline-success" type="button" (click)="buscarEmp(textoBuscar.value)"> Buscar </button>
+        </div>
+        <div class="d-flex">
+          <button class="btn btn-outline-success" type="button">Logout</button>
         </div>
       </div>
     </div>

@@ -1,1 +1,99 @@
-<p>user-manage works!</p>
+<div class="container ml-4">
+    <div class="row mt-3">
+        <div class="col-3 mt-3">
+            <img src="{{ user[0].imageurl }}" class="rounded" alt="..." width="200px" height="200px">
+        </div>
+        <div class="col-2 mt-3">
+            <h5>ID: </h5>
+            <hr>
+            <h5>Nombre: </h5>
+            <hr>
+            <h5>Email: </h5>
+            <hr>
+            <h5>Telefono: </h5>
+            <hr>
+            <h5>URL de Imagen: </h5>
+            <hr>
+            <h5>Nacimiento: </h5>
+            <hr>
+            <h5>Departamento: </h5>
+            <hr>
+            <h5>Puesto: </h5>
+        </div>
+        <div class="col-4 mt-3">
+            <form (ngSubmit)="submit()" #forma="ngForm">
+                <input type="text" readonly class="form-control-plaintext mb-3" id="Id" value="{{ user[0].id }}">
+                <input type="text" #name="ngModel" [(ngModel)]="registerU.name" 
+                       placeholder="Nombre del Usuario" name="name" minlength="3" 
+                       class="form-control-plaintext mb-3" required id="Name" 
+                       [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}">
+                <!--<div class="invalid-feedback" *ngIf="name.invalid && (name.dirty || name.touched)">
+                    <div *ngIf="name.errors.minlength">
+                        El nombre del usuario debe contar minimo con 3 caracteres
+                    </div>
+                    <div *ngIf="name.errors.required">
+                        Para continuar ingrese un Nombre valido
+                    </div>
+                </div>-->
+                <input type="email" #email="ngModel" [(ngModel)]="registerU.email" 
+                       placeholder="Email" name="email" 
+                       class="form-control-plaintext mb-3" required id="Email" 
+                       pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                       [ngClass]="{'is-valid': !email.invalid, 'is-invalid': email.invalid}">
+                <!--<div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <div *ngIf="email.errors.required">
+                        Para continuar ingrese un Email valido
+                    </div>
+                    <div *ngIf="email.errors.pattern">
+                        El correo electrónico no sigue el formato correcto. Sigue este ejemplo: jerry@example.com
+                        {{ email.value }}
+                    </div>
+                </div>-->
+                <input type="number" #phone="ngModel" [(ngModel)]="registerU.phone" 
+                       placeholder="Telefono" name="phone" min="1000000000" max="9999999999" 
+                       class="form-control-plaintext mb-4" required id="Phone" 
+                       [ngClass]="{'is-valid': !phone.invalid, 'is-invalid': phone.invalid}">
+                <!--<div class="invalid-feedback" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                    <div *ngIf="phone.errors.min">
+                        Ingrese su numero de telefono a 10 numero
+                    </div>
+                    <div *ngIf="phone.errors.max">
+                        Ingrese su numero de telefono a 10 numero
+                    </div>
+                    <div *ngIf="phone.errors.required">
+                        Ingrese su numero de telefono a 10 numero
+                    </div>
+                </div>-->
+                <input type="text" #imageurl="ngModel" [(ngModel)]="registerU.imageUrl" 
+                       placeholder="URL de Imagen" name="imageurl"
+                       class="form-control-plaintext mb-4" required 
+                       [ngClass]="{'is-valid': !imageurl.invalid, 'is-invalid': imageurl.invalid}">
+                <!--<div class="invalid-feedback" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                    <div *ngIf="phone.errors.min">
+                        Ingrese su numero de telefono a 10 numero
+                    </div>
+                    <div *ngIf="phone.errors.max">
+                        Ingrese su numero de telefono a 10 numero
+                    </div>
+                    <div *ngIf="phone.errors.required">
+                        Ingrese su numero de telefono a 10 numero
+                    </div>
+                </div>-->
+                <input type="date" #birth="ngModel" [(ngModel)]="registerU.birth" 
+                       placeholder="Nacimiento" name="birth"
+                       class="form-control-plaintext mb-3" required id="birth" 
+                       [ngClass]="{'is-valid': !birth.invalid, 'is-invalid': birth.invalid}">
+                <input type="text" readonly class="form-control-plaintext mb-3" id="Department" value="{{ user[0].department }}">
+                <input type="text" readonly class="form-control-plaintext" id="Role" value="{{ user[0].role }}">
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                    </div>
+                    <div class="col">
+                        <button type="submit" [disabled]="!forma.valid" class="btn btn-primary">Edit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

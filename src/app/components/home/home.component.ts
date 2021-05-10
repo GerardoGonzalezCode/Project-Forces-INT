@@ -13,8 +13,7 @@ export class HomeComponent implements OnInit {
   keyword1 = "finance";
 
   constructor( private newsService: NewsService, private http: HttpClient ) { 
-    this.http.get(`http://localhost:3000/news?keyword=${this.keyword1}`)
-      .subscribe( (resp:any) =>{
+    newsService.getNews(this.keyword1).subscribe( (resp:any) =>{
         this.news = resp.articles;
         console.log(resp.articles);
     })
