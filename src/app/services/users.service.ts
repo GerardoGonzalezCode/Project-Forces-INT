@@ -29,4 +29,12 @@ export class UsersService {
   deleteUsers(id:number) {
     return this.http.delete(`http://localhost:3000/users/${id}`)
   }
+
+  registerUsers(user:any) {
+    return this.http.post(`http://localhost:3000/users`, user)
+  }
+
+  passwordUsers() {
+    return this.http.get(`http://localhost:3000/users/password`)
+  }
 }

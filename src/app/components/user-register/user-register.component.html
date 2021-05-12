@@ -1,11 +1,6 @@
 <div class="container ml-4">
     <div class="row mt-3">
-        <div class="col-3 mt-3">
-            <img src="{{ user[0].imageurl }}" class="rounded" alt="..." width="200px" height="200px">
-        </div>
         <div class="col-2 mt-3">
-            <h5>ID: </h5>
-            <hr>
             <h5>Nombre: </h5>
             <hr>
             <h5>Email: </h5>
@@ -22,7 +17,6 @@
         </div>
         <div class="col-4 mt-3">
             <form (ngSubmit)="submit()" #forma="ngForm">
-                <input type="text" readonly class="form-control-plaintext mb-3" id="Id" value="{{ user[0].id }}">
                 <input type="text" #name="ngModel" [(ngModel)]="registerU.name" 
                        placeholder="Nombre del Usuario" name="name" minlength="3" 
                        class="form-control-plaintext mb-3" required id="Name" 
@@ -49,7 +43,7 @@
                         {{ email.value }}
                     </div>
                 </div>-->
-                <input type="number" #phone="ngModel" [(ngModel)]="registerU.phone" 
+                <input type="tel" #phone="ngModel" [(ngModel)]="registerU.phone" 
                        placeholder="Telefono" name="phone" min="1000000000" max="9999999999" 
                        class="form-control-plaintext mb-4" required id="Phone" 
                        [ngClass]="{'is-valid': !phone.invalid, 'is-invalid': phone.invalid}">
@@ -83,17 +77,45 @@
                        placeholder="Nacimiento" name="birth"
                        class="form-control-plaintext mb-3" required id="birth" 
                        [ngClass]="{'is-valid': !birth.invalid, 'is-invalid': birth.invalid}">
-                <input type="text" readonly class="form-control-plaintext mb-3" id="Department" (mouseover)="changeDR()" (mouseout)="changeINT()" value="{{ user[0].department }}">
-                <input type="text" readonly class="form-control-plaintext" id="Role" (mouseover)="changeDR()" (mouseout)="changeINT()" value="{{ user[0].role }}">
+
+                <input type="number" #department="ngModel" [(ngModel)]="registerU.department" 
+                       placeholder="Nombre del Departamento" name="department"
+                       class="form-control-plaintext mb-3" required
+                       [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}">
+                <input type="number" #role="ngModel" [(ngModel)]="registerU.role" 
+                       placeholder="Puesto" name="department"
+                       class="form-control-plaintext mb-3" required
+                       [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}">
                 <div class="row">
                     <div class="col">
-                        <button type="button" class="btn btn-secondary">Cancel</button>
+                        <button type="button" class="btn btn-secondary" (click)="forma.reset();">Cancel</button>
                     </div>
                     <div class="col">
-                        <button type="submit" [disabled]="!forma.valid" class="btn btn-primary">Edit</button>
+                        <button type="submit" [disabled]="!forma.valid" class="btn btn-primary">Registro</button>
                     </div>
                 </div>
             </form>
+            <div class="col mt-5" *ngIf="userBut">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver Usuario</button>
+            </div>
         </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ver Contraseña del Usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Usuario: {{userLook.email}}
+          Contraseña: {{userLook.password}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="salirHome()">Salir</button>
+        </div>
+      </div>
     </div>
 </div>

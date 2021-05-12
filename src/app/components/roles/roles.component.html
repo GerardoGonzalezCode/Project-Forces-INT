@@ -1,1 +1,112 @@
-<p>roles works!</p>
+<div class="container mt-3">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">Añadir</button>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Puesto</th>
+                <th scope="col">Seed</th>
+                <th scope="col">Herramientas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let role of roles">
+                <th scope="row">{{role.id}}</th>
+                <td>{{role.name}}</td>
+                <td>{{role.seed}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" style="margin-right: 1em;" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="targetRoleM(role)">Edit</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="targetRole(role)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Eliminar Puesto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeTab()"></button>
+        </div>
+        <div class="modal-body">
+          Esta seguro que desea eliminar el Rol {{ delName }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeTab()">Close</button>
+          <button type="button" class="btn btn-danger" (click)="deleteRole()">Delete</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" (click)="closeTab()">Crear Rol</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeTab()"></button>
+        </div>
+        <form (ngSubmit)="regRole()" #forma="ngForm">
+            <div class="modal-body">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
+                    <input type="text" #name="ngModel" [(ngModel)]="roleU.name" 
+                           placeholder="Nombre del Puesto" name="name" minlength="3" 
+                           class="form-control" required
+                           [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}" 
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Seed</span>
+                    <input type="text" #seed="ngModel" [(ngModel)]="roleU.seed" 
+                           placeholder="Semilla de la Compañia" name="seed" 
+                           class="form-control" required
+                           [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}" 
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeTab()">Close</button>
+                <button type="submit" [disabled]="!forma.valid" class="btn btn-primary">Registrar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar Rol</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeTab()"></button>
+        </div>
+        <form (ngSubmit)="updRole()" #formb="ngForm">
+            <div class="modal-body">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
+                    <input type="text" #name="ngModel" [(ngModel)]="roleU.name" 
+                           placeholder="Nombre del Puesto" name="name" minlength="3" 
+                           class="form-control" required
+                           [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}" 
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Seed</span>
+                    <input type="text" #seed="ngModel" [(ngModel)]="roleU.seed" 
+                           placeholder="Semilla de la Compañia" name="seed" 
+                           class="form-control" required
+                           [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}" 
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeTab()">Close</button>
+                <button type="submit" [disabled]="!formb.valid" class="btn btn-primary">Editar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { SearchComponent } from './components/shared/search/search.component';
 import { UserManageComponent } from './components/user-manage/user-manage.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { UserTableComponent } from './components/user-table/user-table.component';
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: 'department', component: DepartmentComponent},
   { path: 'roles', component: RolesComponent},
   { path: 'manage/:id', component: UserManageComponent},
-  { path: 'register', component: UserManageComponent},
+  { path: 'register', component: UserRegisterComponent},
   { path: 'search/:term', component: SearchComponent},
   { path: 'table', component: UserTableComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home'}

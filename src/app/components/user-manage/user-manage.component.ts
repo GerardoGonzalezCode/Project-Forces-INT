@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DepartmentService } from 'src/app/services/department.service';
+import { RoleService } from 'src/app/services/role.service';
 import { UsersService } from 'src/app/services/users.service';
 
 interface userReg {
@@ -27,25 +29,32 @@ export class UserManageComponent implements OnInit {
   param:number = 0;
 
   user:any;
+  department:any;
+  role:any;
   userbirth:any;
 
-  constructor( private activatedRoute:ActivatedRoute, private usersService:UsersService ) { 
+  paramD:number=0;
+  paramR:number=0;
 
-    this.activatedRoute.params.subscribe( params =>{
-      this.param = params.id  
-      console.log(this.param);
+  constructor( private activatedRoute:ActivatedRoute, private usersService:UsersService, 
+               private departmentService:DepartmentService, private roleService:RoleService) { 
+
+  }
+  changeDR(){
+    this.departmentService.getDepartmentByID(this.paramD).subscribe( (departmentt:any) =>{
+
+      this.user[0].department = departmentt[0].name
       
     })
-
-    this.usersService.getUsersByID(this.param).subscribe( usert =>{
-      this.user = usert
-      this.userbirth = this.user[0].birth.slice(0,10)
-      this.registerU.name = this.user[0].name;
-      this.registerU.email = this.user[0].email;
-      this.registerU.phone = this.user[0].phone;
-      this.registerU.imageUrl = this.user[0].imageurl;
-      this.registerU.birth = this.userbirth;
+    this.roleService.getRoleByID(this.paramR).subscribe( (rolet:any) =>{
+      this.user[0].role = rolet[0].name
+      
     })
+  }
+
+  changeINT(){
+    this.user[0].department = this.paramD
+    this.user[0].role = this.paramR
   }
 
   updateUser(){
@@ -60,6 +69,25 @@ export class UserManageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe( params =>{
+      this.param = params.id  
+      console.log(this.param);
+      
+    })
+
+    this.usersService.getUsersByID(this.param).subscribe( usert =>{
+      this.user = usert
+      this.userbirth = this.user[0].birth.slice(0,10)
+      this.registerU.name = this.user[0].name;
+      this.registerU.email = this.user[0].email;
+      this.registerU.phone = this.user[0].phone;
+      this.registerU.imageUrl = this.user[0].imageurl;
+      this.registerU.birth = this.userbirth;
+      this.paramD = this.user[0].department;
+      this.paramR = this.user[0].role;
+
+    })
   }
 
 }
+

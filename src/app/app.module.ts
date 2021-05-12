@@ -14,6 +14,7 @@ import { NewsService } from './services/news.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchComponent } from './components/shared/search/search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RolesComponent,
     AboutComponent,
     UserTableComponent,
-    SearchComponent
+    SearchComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,6 @@ export class NewsService {
   }
 
   getNews(keyword1: any) {
-    return this.http.get(`http://localhost:3000/news?keyword=${keyword1}`)
+    return this.http.get(`http://newsapi-env.eba-an38ccya.us-east-1.elasticbeanstalk.com/news?keyword=${keyword1}`)
   }
 }

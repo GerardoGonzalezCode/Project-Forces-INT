@@ -1,1 +1,130 @@
-<p>department works!</p>
+<div class="container mt-3">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">Añadir</button>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Departamento</th>
+                <th scope="col">Encargado</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Herramientas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let department of departments">
+                <th scope="row">{{department.id}}</th>
+                <td>{{department.name}}</td>
+                <td>{{department.incharge}}</td>
+                <td>{{department.manager}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" style="margin-right: 1em;" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="targetDepartmentM(department)">Edit</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="targetDepartment(department)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Eliminar Departamento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeTab()"></button>
+        </div>
+        <div class="modal-body">
+          Esta seguro que desea eliminar el Departamento {{ delName }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeTab()">Close</button>
+          <button type="button" class="btn btn-danger" (click)="deleteDepartment()">Delete</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Crear Departamento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeTab()"></button>
+        </div>
+        <form (ngSubmit)="regDepartment()" #forma="ngForm">
+            <div class="modal-body">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
+                    <input type="text" #name="ngModel" [(ngModel)]="departmentU.name" 
+                           placeholder="Nombre del Puesto" name="name" minlength="3" 
+                           class="form-control" required
+                           [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}" 
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Encargado</span>
+                    <input type="text" #incharge="ngModel" [(ngModel)]="departmentU.incharge" 
+                           placeholder="Encargado del Departamento" name="incharge" 
+                           class="form-control" required
+                           [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}" 
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Encargado</span>
+                    <input type="text" #manager="ngModel" [(ngModel)]="departmentU.manager" 
+                           placeholder="Encargado del Departamento" name="manager" 
+                           class="form-control" required
+                           [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}" 
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeTab()">Close</button>
+                <button type="submit" [disabled]="!forma.valid" class="btn btn-primary">Registrar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar Departamento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeTab()"></button>
+        </div>
+        <form (ngSubmit)="updDepartment()" #formb="ngForm">
+            <div class="modal-body">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
+                    <input type="text" #name="ngModel" [(ngModel)]="departmentU.name" 
+                           placeholder="Nombre del Puesto" name="name" minlength="3" 
+                           class="form-control" required
+                           [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}" 
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Encargado</span>
+                    <input type="text" #incharge="ngModel" [(ngModel)]="departmentU.incharge" 
+                           placeholder="Semilla de la Compañia" name="incharge" 
+                           class="form-control" required
+                           [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}" 
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Direccion</span>
+                    <input type="text" #manager="ngModel" [(ngModel)]="departmentU.manager" 
+                           placeholder="Semilla de la Compañia" name="manager" 
+                           class="form-control" required
+                           [ngClass]="{'is-valid': !name.invalid, 'is-invalid': name.invalid}" 
+                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeTab()">Close</button>
+                <button type="submit" [disabled]="!formb.valid" class="btn btn-primary">Editar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
